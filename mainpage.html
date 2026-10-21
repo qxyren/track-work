@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Track Work</title>
+  <link rel="stylesheet" href="mainpage.css">
+</head>
+<body>
+
+  <!-- Toast Notification Container -->
+  <div id="notificationToast" class="notification-toast hidden">
+    <div class="toast-content">
+      <span class="toast-icon">⚠️</span>
+      <div class="toast-message" id="toastMessage">You missed a task today!</div>
+    </div>
+    <button id="closeToast" class="toast-close">&times;</button>
+  </div>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">TW</div>
+        <div>
+          <h2>Track Work</h2>
+          <small>Task Management</small>
+        </div>
+      </div>
+
+      <p class="menu-label">MENU</p>
+
+      <nav>
+        <button class="nav-item active" data-filter="all">▦ Dashboard</button>
+        <button class="nav-item" data-filter="todo">☐ My Tasks</button>
+        <button class="nav-item" data-filter="progress">◷ In Progress</button>
+        <button class="nav-item" data-filter="completed">✓ Completed</button>
+        <button class="nav-item" data-filter="missing">⚠️ Missing</button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <img id="userAvatar" class="user-avatar" src="" alt="Profile Picture" style="display:none;" />
+        <div id="userAvatarFallback" class="user-avatar avatar-fallback">U</div>
+        <div class="user-info">
+          <strong id="userName">Loading...</strong>
+          <small id="userEmail">Loading...</small>
+        </div>
+        <button id="logoutBtn" class="logout-btn" title="Sign out">↪</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">WORKSPACE</p>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+        <button id="openTaskBtn" class="primary-btn">＋ Add New Task</button>
+      </header>
+
+      <section class="welcome">
+        <div>
+          <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+          <h2>Stay focused. Get things done.</h2>
+          <p>Organize your tasks and keep track of your progress.</p>
+        </div>
+        <div class="welcome-icon">✓</div>
+      </section>
+
+      <section class="stats">
+        <article class="stat-card">
+          <div class="stat-icon purple">▦</div>
+          <p>Total Tasks</p>
+          <h2 id="totalCount">0</h2>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon orange">◷</div>
+          <p>To Do</p>
+          <h2 id="todoCount">0</h2>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon blue">↗</div>
+          <p>In Progress</p>
+          <h2 id="progressCount">0</h2>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon green">✓</div>
+          <p>Completed</p>
+          <h2 id="completedCount">0</h2>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon red">⚠️</div>
+          <p>Missing</p>
+          <h2 id="missingCount">0</h2>
+        </article>
+      </section>
+
+      <section class="tasks-section">
+        <div class="section-heading">
+          <div>
+            <h2 id="taskHeading">My Tasks</h2>
+            <p>Manage your work and upcoming deadlines.</p>
+          </div>
+
+          <select id="sortTasks" aria-label="Sort tasks">
+            <option value="newest">Newest first</option>
+            <option value="deadline">Nearest deadline</option>
+            <option value="priority">Highest priority</option>
+          </select>
+        </div>
+
+        <div id="taskList" class="task-grid"></div>
+      </section>
+
+      <footer>© 2026 Track Work · Make every task count.</footer>
+    </main>
+  </div>
+
+  <div id="taskModal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h2 id="modalTitle">Create a Task</h2>
+          <p>Add a new task to your workspace.</p>
+        </div>
+        <button id="closeModalBtn" class="close-btn" aria-label="Close">×</button>
+      </div>
+
+      <form id="taskForm">
+        <label for="taskTitle">Task Title *</label>
+        <input id="taskTitle" type="text" maxlength="120" placeholder="e.g. Finish project proposal" required>
+
+        <label for="taskDescription">Description</label>
+        <textarea id="taskDescription" rows="3" placeholder="What do you need to do?"></textarea>
+
+        <div class="form-row">
+          <div>
+            <label for="taskDeadline">Due Date *</label>
+            <input id="taskDeadline" type="date" required>
+          </div>
+          <div>
+            <label for="taskPriority">Priority</label>
+            <select id="taskPriority">
+              <option value="Low">Low</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="taskStatus">Status</label>
+        <select id="taskStatus">
+          <option value="todo">To Do</option>
+          <option value="progress">In Progress</option>
+          <option value="completed">Completed</option>
+        </select>
+
+        <div class="form-actions">
+          <button type="button" id="cancelBtn" class="secondary-btn">Cancel</button>
+          <button type="submit" class="primary-btn">Save Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="mainpage.js"></script>
+</body>
+</html>
